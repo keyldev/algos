@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace search
+namespace search.Search
 {
     internal class BinarySearch
     {
@@ -30,6 +30,37 @@ namespace search
                 return Recursive(array, digit, middleIndex + 1, lastIndex);
             }
         }
+
+        public void Iterative(int[,] array, int digit)
+        {
+            int rows = array.GetLength(0);
+            int cols = array.GetLength(1);
+
+            int left = 0;
+            int right = rows * cols - 1;
+            while(left <= right)
+            {
+                int middle = (left + right) / 2;
+                int midRow = middle / cols;
+                int midCol = middle % cols;
+
+                if (array[midRow, midCol] == digit)
+                {
+                    Console.WriteLine($"Row: {midRow}; Col: {midCol}");
+
+                    break;
+                }
+                else if (array[midRow, midCol] <  digit)
+                {
+                    left = middle + 1;
+                }
+                else
+                {
+                    right = middle - 1;
+                }
+            }
+        }
+
         public int Iterative(int[] array, int digit)
         {
             int left = 0, right = array.Length - 1;
